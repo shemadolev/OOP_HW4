@@ -9,6 +9,8 @@ public class Panel implements ColorChangeObserver {
     }
 
     public Color getColor(){
+        if(_color == null)
+            return Color.black;
         return _color;
     }
 }
