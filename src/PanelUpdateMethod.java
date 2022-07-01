@@ -1,5 +1,5 @@
 import java.awt.*;
 
-public interface PanelUpdateOrder {
+public interface PanelUpdateMethod {
     void update(Color color, Panel[][] panelMat);
 }
