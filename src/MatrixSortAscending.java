@@ -1,3 +1,4 @@
+import java.util.ArrayList;
 import java.util.List;
 
 public class MatrixSortAscending<T> extends MatrixSorter<T> {
@@ -13,6 +14,12 @@ public class MatrixSortAscending<T> extends MatrixSorter<T> {
 
     @Override
     public List<T> getSorted(T[][] matrix) {
-        return null;
+        ArrayList<T> list = new ArrayList<>();
+        for (int i = 0; i < _width; i++) {
+            for (int j = 0; j < _height; j++) {
+                list.add(matrix[i][j]);
+            }
+        }
+        return list;
     }
 }
