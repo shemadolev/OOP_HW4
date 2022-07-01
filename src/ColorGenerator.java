@@ -110,15 +110,12 @@ public final class ColorGenerator {
         List<ColorChangeObserver> observerList = _matrixSorter.getSorted(_observersMatrix);
         //notify each ColorChangeObserver, in a 40ms delay
         Iterator<ColorChangeObserver> iterator = observerList.iterator();
-        Timer timer = new Timer(40, new ActionListener() {
-            @Override
-            public void actionPerformed(ActionEvent e) {
-                if (iterator.hasNext()) {
-                    ColorChangeObserver ColorChangeObserver = iterator.next();
-                    ColorChangeObserver.onColorChange(_color);
-                } else
-                    ((Timer) e.getSource()).stop();
-            }
+        Timer timer = new Timer(40, e -> {
+            if (iterator.hasNext()) {
+                ColorChangeObserver ColorChangeObserver = iterator.next();
+                ColorChangeObserver.onColorChange(_color);
+            } else
+                ((Timer) e.getSource()).stop();
         });
         timer.start();
         checkRep();
