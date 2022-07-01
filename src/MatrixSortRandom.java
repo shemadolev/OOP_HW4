@@ -2,7 +2,11 @@ import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
 
-// MatrixSorter is an abstract class that supplies a sorted list of a 2D matrix's elements.
+/**
+ * MatrixSortRandom creates a list of a 2D matrix's elements in a random order.
+ *
+ * @param <T> The element of the 2D matrix
+ */
 public class MatrixSortRandom<T> extends MatrixSorter<T> {
 
     /**
@@ -15,14 +19,14 @@ public class MatrixSortRandom<T> extends MatrixSorter<T> {
     }
 
     /**
-     * @requires matrix dimensions == (_width,_height)
      * @return A sorted form the elements in the given matrix.
-     *         Generate a random list of the elements.
+     * Generate a random list of the elements.
+     * @requires matrix dimensions == (_width,_height)
      */
     @Override
     public List<T> getSorted(T[][] matrix) {
         ArrayList<T> list = new ArrayList<>();
-        for(T[] row : matrix)
+        for (T[] row : matrix)
             list.addAll(List.of(row));
         Collections.shuffle(list);
         return list;

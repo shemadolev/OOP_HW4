@@ -1,7 +1,11 @@
 import java.util.ArrayList;
 import java.util.List;
 
-// MatrixSortColumns is an abstract class that supplies a sorted list of a 2D matrix's elements (using columns traversal).
+/**
+ * MatrixSortColumns creates a sorted list of a 2D matrix's elements by each element index (using columns traversal).
+ *
+ * @param <T> The element of the 2D matrix
+ */
 public class MatrixSortColumns<T> extends MatrixSorter<T> {
 
     /**
@@ -13,9 +17,9 @@ public class MatrixSortColumns<T> extends MatrixSorter<T> {
     }
 
     /**
-     * @requires matrix dimensions == (_width,_height)
      * @return A sorted form the elements in the given matrix.
-     *         Sort elements by columns' traversal.
+     * Sort elements by columns' traversal.
+     * @requires matrix dimensions == (_width,_height)
      */
     @Override
     public List<T> getSorted(T[][] matrix) {

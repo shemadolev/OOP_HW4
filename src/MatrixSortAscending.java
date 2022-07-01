@@ -1,7 +1,11 @@
 import java.util.ArrayList;
 import java.util.List;
 
-// MatrixSortAscending creates a sorted list of a 2D matrix's elements by each element index (using rows traversal).
+/**
+ * MatrixSortAscending creates a sorted list of a 2D matrix's elements by each element index (using rows traversal).
+ *
+ * @param <T> The element of the 2D matrix
+ */
 public class MatrixSortAscending<T> extends MatrixSorter<T> {
 
     /**
@@ -13,9 +17,9 @@ public class MatrixSortAscending<T> extends MatrixSorter<T> {
     }
 
     /**
-     * @requires matrix dimensions == (_width,_height)
      * @return A sorted form the elements in the given matrix.
-     *         Sort elements by rows' traversal.
+     * Sort elements by rows' traversal.
+     * @requires matrix dimensions == (_width,_height)
      */
     @Override
     public List<T> getSorted(T[][] matrix) {

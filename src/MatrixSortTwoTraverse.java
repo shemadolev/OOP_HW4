@@ -1,8 +1,12 @@
 import java.util.ArrayList;
 import java.util.List;
 
-// MatrixSortTwoTraverse creates a sorted list of a 2D matrix's elements making two traverses.
-// First Traversal of even elements and then odd elements, starting count indices from 0.
+/**
+ * MatrixSortTwoTraverse creates a sorted list of a 2D matrix's elements making two traverses:
+ * First Traversal of even elements and then odd elements, starting count indices from 0.
+ *
+ * @param <T> The element of the 2D matrix
+ */
 public class MatrixSortTwoTraverse<T> extends MatrixSorter<T> {
 
     /**
@@ -14,9 +18,9 @@ public class MatrixSortTwoTraverse<T> extends MatrixSorter<T> {
     }
 
     /**
-     * @requires matrix dimensions == (_width,_height)
      * @return A sorted form the elements in the given matrix.
-     *         First ascending order of even indices, then ascending order of odd indices.
+     * First ascending order of even indices, then ascending order of odd indices.
+     * @requires matrix dimensions == (_width,_height)
      */
     @Override
     public List<T> getSorted(T[][] matrix) {
