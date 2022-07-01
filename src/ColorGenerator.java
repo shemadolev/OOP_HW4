@@ -2,6 +2,7 @@ import javax.swing.*;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.util.Iterator;
 import java.util.List;
 import java.util.Random;
 import java.util.concurrent.TimeUnit;
@@ -103,18 +104,23 @@ public final class ColorGenerator {
      */
     private void notifyObservers() {
         checkRep();
-        try {
-            if (_observersMatrix == null) //no observers, do nothing
-                return;
-            //get sorted list of Panels
-            List<ColorChangeObserver> panelList = _matrixSorter.getSorted(_observersMatrix);
-            //notify each ColorChangeObserver, in a 40ms delay
-            for (ColorChangeObserver ColorChangeObserver : panelList) {
-                ColorChangeObserver.onColorChange(_color);
-                TimeUnit.MILLISECONDS.sleep(40);
+        if (_observersMatrix == null) //no observers, do nothing
+            return;
+        //get sorted list of Panels
+        List<ColorChangeObserver> observerList = _matrixSorter.getSorted(_observersMatrix);
+        //notify each ColorChangeObserver, in a 40ms delay
+        Iterator<ColorChangeObserver> iterator = observerList.iterator();
+        Timer timer = new Timer(40, new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                if (iterator.hasNext()) {
+                    ColorChangeObserver ColorChangeObserver = iterator.next();
+                    ColorChangeObserver.onColorChange(_color);
+                } else
+                    ((Timer) e.getSource()).stop();
             }
-        } catch (InterruptedException ignored) {
-        } //Ignore interruption - if interrupted, observers won't be notified
+        });
+        timer.start();
         checkRep();
     }
 
