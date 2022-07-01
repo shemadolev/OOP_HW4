@@ -3,6 +3,7 @@ import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.util.List;
+import java.util.Random;
 import java.util.concurrent.TimeUnit;
 
 //Singleton
@@ -12,6 +13,7 @@ public final class ColorGenerator {
     Color _color;
 
     private static ColorGenerator INSTANCE;
+    private static final Random random = new Random();
 
     public void setObserversMatrix(ColorChangeObserver[][] panelsMatrix){
         _panelsMatrix = panelsMatrix;
@@ -34,7 +36,11 @@ public final class ColorGenerator {
     }
 
     private void generateNewColor(){
-        //todo change color
+        //generate a random color
+        float r = random.nextFloat();
+        float g = random.nextFloat();
+        float b = random.nextFloat();
+        _color = new Color(r,g,b);
 
         notifyObservers();
     }
