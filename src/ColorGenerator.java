@@ -15,12 +15,13 @@ import java.util.concurrent.TimeUnit;
  */
 public final class ColorGenerator {
     private static final int CHANGE_INTERVAL = 2000; //ms
-    private MatrixSorter<ColorChangeObserver> _matrixSorter;
-    private ColorChangeObserver[][] _panelsMatrix;
-    Color _color;
-
     private static ColorGenerator INSTANCE;
     private static final Random random = new Random();
+
+    private MatrixSorter<ColorChangeObserver> _matrixSorter;
+    private ColorChangeObserver[][] _observersMatrix;
+    private Color _color;
+
 
     /**
      * @modifies this
@@ -34,14 +35,8 @@ public final class ColorGenerator {
                 generateNewColor();
             }
         });
-    }
-
-    /**
-     * @effects Set the observers of color changing. This will override any previous registration of color-changing
-     * observers.
-     */
-    public void setObserversMatrix(ColorChangeObserver[][] observers) {
-        _panelsMatrix = observers;
+        timer.start();
+        checkRep();
     }
 
     /**
@@ -54,9 +49,32 @@ public final class ColorGenerator {
     }
 
     /**
+     * @modifies this
+     * @effects Set sorter as the object that will sort the observers for notification order.
+     * @param sorter a matrix sorter of ColorChangeObserver objects
+     */
+    public void setSorter(MatrixSorter<ColorChangeObserver> sorter) {
+        checkRep();
+        _matrixSorter = sorter;
+        checkRep();
+    }
+
+    /**
+     * @requires this.setSorter has already been called with a valid sorter
+     * @effects Set the observers of color changing. This will override any previous registration of color-changing
+     * observers.
+     */
+    public void setObserversMatrix(ColorChangeObserver[][] observers) {
+        checkRep();
+        _observersMatrix = observers;
+        checkRep();
+    }
+
+    /**
      * @modifies generates a new random color and notifies the change to the observers.
      */
     private void generateNewColor() {
+        checkRep();
         //generate a random color
         float r = random.nextFloat();
         float g = random.nextFloat();
@@ -64,31 +82,31 @@ public final class ColorGenerator {
         _color = new Color(r, g, b);
 
         notifyObservers();
+        checkRep();
     }
 
     /**
      * @effects Notifies the observers of color change
      */
     private void notifyObservers() {
-        //get sorted list of Panels
-        List<ColorChangeObserver> panelList = _matrixSorter.getSorted(_panelsMatrix);
-        //notify each ColorChangeObserver, in a 40ms delay
-        for (ColorChangeObserver ColorChangeObserver : panelList) {
-            ColorChangeObserver.onColorChange(_color);
-            try {
+        checkRep();
+        try {
+            if(_observersMatrix == null) //no observers, do nothing
+                return;
+            //get sorted list of Panels
+            List<ColorChangeObserver> panelList = _matrixSorter.getSorted(_observersMatrix);
+            //notify each ColorChangeObserver, in a 40ms delay
+            for (ColorChangeObserver ColorChangeObserver : panelList) {
+                ColorChangeObserver.onColorChange(_color);
                 TimeUnit.MILLISECONDS.sleep(40);
-            } catch (Exception ignored) {
             }
-        }
+        } catch (InterruptedException ignored) {
+        } //Ignore interruption - if interrupted, observers won't be notified
+        checkRep();
     }
 
-
-    public void setSorter(MatrixSorter<ColorChangeObserver> sorter) {
-        _matrixSorter = sorter;
-    }
-
-    public Color getColor() {
-        return _color;
+    private void checkRep(){
+        assert (_observersMatrix != null) && _matrixSorter == null : "observers are set without a sorter object";
     }
 
     //todo Should we have a default sorter? how can we enforce setting a sorter? if not set, don't notify?
