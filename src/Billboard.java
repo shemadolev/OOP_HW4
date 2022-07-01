@@ -1,19 +1,27 @@
-import java.awt.*;
+import javax.swing.*;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 
-public class Billboard {
-    private PanelUpdateMethod _panelUpdateMethod;
+public class Billboard extends JFrame implements ActionListener {
+
     Panel[][] _panelsMat;
 
+    public static final int WIDTH = 6;
+    public static final int HEIGHT = 6;
 
-    public Billboard(int width, int height){
-        _panelsMat = new Panel[width][height];
+    public Billboard(){
+        _panelsMat = new Panel[WIDTH][HEIGHT];
+        //register all panels to be updated by ColorGenerator color changes
+        ColorGenerator.getInstance().setObserversMatrix(_panelsMat);
     }
 
-    public void setUpdateMethod(PanelUpdateMethod updateMethod){
-        _panelUpdateMethod = updateMethod;
-    }
+    //todo add toolbar and buttons to select different sort methods
 
-    public void updateColor(Color color){
-        _panelUpdateMethod.update(color, _panelsMat);
+    @Override
+    public void actionPerformed(ActionEvent e) {
+
+
+        //example - if selected ascending
+        ColorGenerator.getInstance().setSorter(new MatrixSortAscending<>(WIDTH,HEIGHT));
     }
 }
