@@ -7,32 +7,29 @@ import java.util.List;
  *
  * @param <T> The element of the 2D matrix
  */
-public class MatrixSortTwoTraverse<T> extends MatrixSorter<T> {
+public class MatrixSortTwoTraverse<T> implements MatrixSorter<T> {
+    /* Abstraction function : none */
 
-    /**
-     * @requires width, height > 0
-     * @modifies this
-     */
-    public MatrixSortTwoTraverse(int width, int height) {
-        super(width, height);
-    }
+    /* Representation invariant : none*/
 
     /**
      * @return A sorted form the elements in the given matrix.
      * First ascending order of even indices, then ascending order of odd indices.
-     * @requires matrix dimensions == (_width,_height)
+     * @requires matrix[i].length == matrix[j].length for every i,j in [0,matrix.length)
      */
     @Override
     public List<T> getSorted(T[][] matrix) {
+        int height = matrix.length;
+        int width = matrix[0].length;
         List<T> sortedList = new ArrayList<>();
         // traverse even indices (0,2,4,...)
-        for (int i = 0; i < _height; i++) {
-            for (int j = 0; j < _width; j += 2)
+        for (int i = 0; i < height; i++) {
+            for (int j = 0; j < width; j += 2)
                 sortedList.add(matrix[i][j]);
         }
         // traverse odd indices (1,3,5,...)
-        for (int i = 0; i < _height; i++) {
-            for (int j = 1; j < _width; j += 2)
+        for (int i = 0; i < height; i++) {
+            for (int j = 1; j < width; j += 2)
                 sortedList.add(matrix[i][j]);
         }
         return sortedList;

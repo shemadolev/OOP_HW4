@@ -3,16 +3,26 @@ import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
+/**
+ * todo
+ */
 public class Billboard extends JFrame implements ActionListener {
 
-    private static final int WINDOW_WIDTH = 600;
+    /* Abstraction function
+    todo
+     */
+
+    /* Representation invariant
+    todo
+     */
+
+    private static final int WINDOW_WIDTH = 800;
     private static final int WINDOW_HEIGHT = 600;
     private final Panel[][] _panelsMat;
 
     public static final int PANELS_X = 6;
     public static final int PANELS_Y = 6;
-    private static final MatrixSorter<ColorChangeObserver> DEFAULT_SORTER = new MatrixSortAscending<>(PANELS_X,
-            PANELS_Y);
+    private static final MatrixSorter<ColorChangeObserver> DEFAULT_SORTER = new MatrixSortAscending<>();
 
     private JRadioButtonMenuItem ascendingItem, columnsItem, twoTraverseItem, randomItem;
 
@@ -43,7 +53,7 @@ public class Billboard extends JFrame implements ActionListener {
      * @modifies g
      * @effects todo
      */
-    public void paint(Graphics g) { //fixme either sorting is bad, or objects x/y are reversed
+    public void paint(Graphics g) {
         super.paint(g);
         Graphics paneGraphics = getContentPane().getGraphics(); //This is the internal painting are, without the toolbar
 
@@ -52,7 +62,7 @@ public class Billboard extends JFrame implements ActionListener {
 
         for (int i = 0; i < PANELS_X; i++) {
             for (int j = 0; j < PANELS_Y; j++) {
-                paneGraphics.setColor(_panelsMat[i][j].getColor());
+                paneGraphics.setColor(_panelsMat[j][i].getColor());
                 int x = i * panelWidth, y = j * panelHeight;
                 paneGraphics.fillRect(x, y, panelWidth, panelHeight);
             }
@@ -97,16 +107,16 @@ public class Billboard extends JFrame implements ActionListener {
         ColorGenerator colorGenerator = ColorGenerator.getInstance();
 
         if (source.equals(ascendingItem)) {
-            colorGenerator.setSorter(new MatrixSortAscending<>(PANELS_X, PANELS_Y));
+            colorGenerator.setSorter(new MatrixSortAscending<>());
         }
         if (source.equals(columnsItem)) {
-            colorGenerator.setSorter(new MatrixSortColumns<>(PANELS_X, PANELS_Y));
+            colorGenerator.setSorter(new MatrixSortColumns<>());
         }
         if (source.equals(twoTraverseItem)) {
-            colorGenerator.setSorter(new MatrixSortTwoTraverse<>(PANELS_X, PANELS_Y));
+            colorGenerator.setSorter(new MatrixSortTwoTraverse<>());
         }
         if (source.equals(randomItem)) {
-            colorGenerator.setSorter(new MatrixSortRandom<>(PANELS_X, PANELS_Y));
+            colorGenerator.setSorter(new MatrixSortRandom<>());
         }
     }
 

@@ -7,21 +7,15 @@ import java.util.List;
  *
  * @param <T> The element of the 2D matrix
  */
-public class MatrixSortRandom<T> extends MatrixSorter<T> {
+public class MatrixSortRandom<T> implements MatrixSorter<T> {
+    /* Abstraction function : none */
 
-    /**
-     * @param width
-     * @param height
-     * @requires width, height > 0
-     */
-    public MatrixSortRandom(int width, int height) {
-        super(width, height);
-    }
+    /* Representation invariant : none*/
 
     /**
      * @return A sorted form the elements in the given matrix.
      * Generate a random list of the elements.
-     * @requires matrix dimensions == (_width,_height)
+     * @requires matrix[i].length == matrix[j].length for every i,j in [0,matrix.length)
      */
     @Override
     public List<T> getSorted(T[][] matrix) {

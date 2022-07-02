@@ -1,11 +1,8 @@
 import javax.swing.*;
 import java.awt.*;
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
 import java.util.Iterator;
 import java.util.List;
 import java.util.Random;
-import java.util.concurrent.TimeUnit;
 
 /**
  * ColorGenerator is a Singleton that generates a new random color every 2 seconds.
@@ -43,12 +40,7 @@ public final class ColorGenerator {
      */
     private ColorGenerator() {
         //Update color every 2 seconds
-        Timer timer = new Timer(CHANGE_INTERVAL, new ActionListener() {
-            @Override
-            public void actionPerformed(ActionEvent e) {
-                generateNewColor();
-            }
-        });
+        Timer timer = new Timer(CHANGE_INTERVAL, e -> generateNewColor());
         timer.start();
         checkRep();
     }
@@ -77,6 +69,7 @@ public final class ColorGenerator {
      * @requires this.setSorter has already been called with a valid sorter
      * @effects Set the observers of color changing. This will override any previous registration of color-changing
      * observers.
+     * @modifies this
      */
     public void setObserversMatrix(ColorChangeObserver[][] observers) {
         checkRep();
@@ -85,7 +78,8 @@ public final class ColorGenerator {
     }
 
     /**
-     * @modifies generates a new random color and notifies the change to the observers.
+     * @effects  generates a new random color and notifies the change to the observers.
+     * @modifies this
      */
     private void generateNewColor() {
         checkRep();
@@ -100,7 +94,7 @@ public final class ColorGenerator {
     }
 
     /**
-     * @effects Notifies the observers of color change, by the order the last set sorter dictates.
+     * @effects Notifies the observers of color change, by the order the set sorter dictates.
      */
     private void notifyObservers() {
         checkRep();

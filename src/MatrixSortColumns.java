@@ -6,26 +6,23 @@ import java.util.List;
  *
  * @param <T> The element of the 2D matrix
  */
-public class MatrixSortColumns<T> extends MatrixSorter<T> {
+public class MatrixSortColumns<T> implements MatrixSorter<T> {
+    /* Abstraction function : none */
 
-    /**
-     * @requires width, height > 0
-     * @modifies this
-     */
-    public MatrixSortColumns(int width, int height) {
-        super(width, height);
-    }
+    /* Representation invariant : none*/
 
     /**
      * @return A sorted form the elements in the given matrix.
      * Sort elements by columns' traversal.
-     * @requires matrix dimensions == (_width,_height)
+     * @requires matrix[i].length == matrix[j].length for every i,j in [0,matrix.length)
      */
     @Override
     public List<T> getSorted(T[][] matrix) {
+        int height = matrix.length;
+        int width = matrix[0].length;
         List<T> list = new ArrayList<>();
-        for (int j = 0; j < _height; j++) {
-            for (int i = 0; i < _width; i++) {
+        for (int j = 0; j < height; j++) {
+            for (int i = 0; i < width; i++) {
                 list.add(matrix[i][j]);
             }
         }
