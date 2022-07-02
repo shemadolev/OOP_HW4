@@ -14,7 +14,7 @@ public class Panel implements ColorChangeObserver {
     private Color _color;
 
     /**
-     * @effects Inform the object of the color changing, perform necessary actions.
+     * @effects Inform the object of the color changing, updates the panel's color to match the given color.
      * @modifies this
      */
     @Override
