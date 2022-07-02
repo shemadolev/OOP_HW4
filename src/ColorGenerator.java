@@ -116,6 +116,6 @@ public final class ColorGenerator {
     }
 
     private void checkRep() {
-        assert (_observersMatrix != null) && _matrixSorter == null : "observers are set without a sorter object";
+        assert (_observersMatrix == null) || _matrixSorter != null : "observers are set without a sorter object";
     }
 }
