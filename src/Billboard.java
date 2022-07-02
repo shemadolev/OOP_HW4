@@ -122,6 +122,10 @@ public class Billboard extends JFrame implements ActionListener {
         return mainPanel;
     }
 
+    /**
+     * @effects handles an event of JMenu item, switch the sorter type according to the user input.
+     * @modifies this
+     */
     @Override
     public void actionPerformed(ActionEvent e) {
         checkRep();
