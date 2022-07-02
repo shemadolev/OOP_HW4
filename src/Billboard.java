@@ -110,6 +110,10 @@ public class Billboard extends JFrame implements ActionListener {
         return menuBar;
     }
 
+    /**
+     *
+     * @return A new main panel with the dimensions of this.WINDOW_WIDTH X this.WINDOW_HEIGHT and white background.
+     */
     private JPanel createMainPanel() {
         checkRep();
         JPanel mainPanel = new JPanel();
