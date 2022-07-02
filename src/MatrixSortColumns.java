@@ -21,8 +21,8 @@ public class MatrixSortColumns<T> implements MatrixSorter<T> {
         int height = matrix.length;
         int width = matrix[0].length;
         List<T> list = new ArrayList<>();
-        for (int j = 0; j < height; j++) {
-            for (int i = 0; i < width; i++) {
+        for (int j = 0; j < width; j++) {
+            for (int i = 0; i < height; i++) {
                 list.add(matrix[i][j]);
             }
         }
