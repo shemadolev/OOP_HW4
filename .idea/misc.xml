@@ -1,5 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
+  <component name="JavadocGenerationManager">
+    <option name="OUTPUT_DIRECTORY" value="$USER_HOME$/Technion/Idan Golan - 06 OOP - 046271/03 HW/4" />
+    <option name="OTHER_OPTIONS" value="-tag modifies:a:&quot;Modifies:&quot; -tag effects:a:&quot;Effects:&quot; -tag requires:a:&quot;Requires:&quot;" />
+  </component>
   <component name="ProjectRootManager" version="2" languageLevel="JDK_17" default="true" project-jdk-name="openjdk-17" project-jdk-type="JavaSDK">
     <output url="file://$PROJECT_DIR$/out" />
   </component>

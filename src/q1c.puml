@@ -1,0 +1,30 @@
+@startuml
+
+abstract class Greeting{
+    + greet(String)
+}
+class MaleGreeting extends Greeting{
+    + greet(String)
+}
+class FemaleGreeting extends Greeting{
+    + greet(String)
+}
+
+abstract class Person{
+    -name : String
+    + <<abstract>> greet(String)
+    + getName() : String
+}
+class Male extends Person{
+    + greet(String)
+}
+class Female extends Person {
+    + greet(String)
+}
+
+'-----------------------------------
+
+MaleGreeting     <... Male    : <<use>>
+FemaleGreeting   <... Female  : <<use>>
+
+@enduml

@@ -1,0 +1,21 @@
+@startuml
+
+interface HouseFactory {
+    + createWooden(color) : House
+    + createGlass(color) : House
+}
+
+class GlassHouseFactory
+class WoodenHouseFactory
+
+HouseFactory <|.. GlassHouseFactory
+HouseFactory <|.. WoodenHouseFactory
+
+class Neighborhood{
+    - houseFactory : HouseFactory
+    +setFactory(HouseFactory)
+}
+
+Neighborhood --> HouseFactory
+
+@enduml

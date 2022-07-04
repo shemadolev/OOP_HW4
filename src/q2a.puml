@@ -1,0 +1,15 @@
+@startuml
+class Employee
+
+interface "<<interface>>\nEmployeeExporter" as ee {
+    + save(Employee, path)
+}
+class EmployeeToJson
+class EmployeeToXml
+
+Employee <. ee : <<uses>>
+
+ee <|.. EmployeeToJson
+ee <|.. EmployeeToXml
+
+@enduml
